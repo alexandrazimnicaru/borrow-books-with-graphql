@@ -17,6 +17,7 @@ type Book {
   title: String!
   author: String!
   genre: String!
+  description: String
   owner: User!
   createdAt: Int!
 }
@@ -25,6 +26,7 @@ input NewBookInput {
   title: String!
   author: String!
   genre: String!
+  description: String
 }
 
 type Query {

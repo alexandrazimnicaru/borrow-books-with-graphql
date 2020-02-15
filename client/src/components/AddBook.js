@@ -29,11 +29,12 @@ const AddBook = ({onSubmit, onCancel}) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [genre, setGenre] = useState('');
+  const [description, setDescription] = useState('');
   const classes = useStyles();
 
   const submit = e => {
     e.preventDefault();
-    onSubmit({ title, author, genre });
+    onSubmit({ title, author, genre, description });
   }
 
   const cancel = e => {
@@ -73,11 +74,23 @@ const AddBook = ({onSubmit, onCancel}) => {
 
               <div>
                 <TextField
-                  className={classes.lastField}
+                  className={classes.field}
                   placeholder="Genre"
                   value={genre}
                   onChange={e => setGenre(e.target.value)}
                   required
+                />
+              </div>
+
+              <div>
+                <TextField
+                  className={classes.lastField}
+                  placeholder="Description"
+                  multiline
+                  rows="4"
+                  rowsMax="8"
+                  value={description}
+                  onChange={e => setDescription(e.target.value)}
                 />
               </div>
 

@@ -10,17 +10,27 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-  media: {
-    height: 140,
-    display: 'flex',
-  },
   placeholder: {
     margin: 'auto',
     fontSize: '6em',
+  },
+  description: {
+    position: 'relative',
+    height: '6.2em',
+    '&::after': {
+      content: "''",
+      textAlign: 'right',
+      position: 'absolute',
+      bottom: '-15px',
+      right: 0,
+      width: '70%',
+      height: '1.2em',
+      background: 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%)',
+    }
   }
 }));
 
-const Book = ({ title, author, genre }) => {
+const Book = ({ title, author, genre, description }) => {
   const classes = useStyles();
 
   return (
@@ -35,10 +45,17 @@ const Book = ({ title, author, genre }) => {
             {author} | {genre}
           </Typography>
   
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
+          {
+            description && (
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                className={classes.description}>
+                {description}
+              </Typography>
+            )
+          }
         </CardContent>
       </CardActionArea>
     </Card>

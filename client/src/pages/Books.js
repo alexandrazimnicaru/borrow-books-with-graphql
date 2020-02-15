@@ -16,6 +16,7 @@ const BOOK_DETAILS = gql`
     title
     author
     genre
+    description
   }
 `
 
@@ -75,6 +76,7 @@ const Books = () => {
           title: input.title,
           author: input.author,
           genre: input.genre,
+          description: input.description,
         }
       }
     })
@@ -102,7 +104,7 @@ const Books = () => {
 
       <Grid item xs={12}>
         <Grid container spacing={3}>
-          {booksList}
+            {booksList}
         </Grid>
       </Grid>
 
