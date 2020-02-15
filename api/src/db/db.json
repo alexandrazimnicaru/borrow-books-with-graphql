@@ -1,0 +1,19 @@
+{
+  "user": [
+    {
+      "id": "jBWMVGjm50l6LGwepDoty",
+      "username": "alex",
+      "password": "jBWMVGjm50l6LGwepDoty"
+    }
+  ],
+  "book": [
+    {
+      "id": "KaWJK-bQy5g8ptkG4014f",
+      "createdAt": 1581764118345,
+      "title": "Lord of the Rings",
+      "author": "JRR Tokien",
+      "genre": "Fantasy",
+      "user": "jBWMVGjm50l6LGwepDoty"
+    }
+  ]
+}

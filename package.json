@@ -1,0 +1,37 @@
+{
+  "name": "borrow-books-with-graphql",
+  "version": "0.1.9",
+  "private": true,
+  "dependencies": {
+    "apollo-server": "^2.10.1",
+    "graphql": "^14.6.0",
+    "lowdb": "^1.0.0",
+    "nanoid": "^2.1.11"
+  },
+  "scripts": {
+    "server": "nodemon api/src/server.js",
+    "test-server": "jest api/tests"
+  },
+  "browserlist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@playlyfe/gql": "^2.6.2",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "parcel": "^1.12.4"
+  }
+}
