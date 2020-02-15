@@ -9,3 +9,7 @@ yarn-error.log*
 
 # Dependency directories
 node_modules/
+
+# Parcel build output
+.cache
+dist/
