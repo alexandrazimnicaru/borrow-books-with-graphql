@@ -5,6 +5,8 @@ type User {
   id: ID!
   username: String!
   books: [Book]!
+  requested: [Book]!
+  borrowed: [Book]!
   refreshToken: String!
   token: String!
 }
@@ -21,6 +23,8 @@ type Book {
   genre: String!
   description: String
   owner: User!
+  requestedBy: ID
+  borrowedBy: ID
   createdAt: Int!
 }
 
@@ -31,16 +35,31 @@ input NewBookInput {
   description: String
 }
 
+input NewRequestBookInput {
+  id: ID!
+}
+
+input NewLendBookInput {
+  id: ID!
+  requestedBy: ID!
+}
+
 type Query {
   me: User!
   books: [Book]!
   book(id: ID!): Book!
+  requested: [Book]!
+  borrowed: [Book]!
+  search: [Book]!
 }
 
 type Mutation {
   login(input: NewUserInput!): User!
   addUser(input: NewUserInput!): User!
   addBook(input: NewBookInput!): Book!
+  requestBook(input: NewRequestBookInput!): Book!
+  lendBook(input: NewLendBookInput!): Book!
+  returnBook(input: NewRequestBookInput!): Book!
 }
 `;
 

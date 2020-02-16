@@ -23,6 +23,24 @@ module.exports = {
       }
       return models.Book.findOne({id});
     },
+    search(_, { id }, { models, user }) {
+      if (!user) {
+        return;
+      }
+      return models.Book.findMany(book => book.user !== user.id && !book.borrowedBy);
+    },
+    requested(_, { input }, { models, user }) {
+      if (!user) {
+        return;
+      }
+      return models.Book.findMany({ requestedBy: user.id });
+    },
+    borrowed(_, { input }, { models, user }) {
+      if (!user) {
+        return;
+      }
+      return models.Book.findMany({ borrowedBy: user.id });
+    },
   },
   Mutation: {
     login(_, { input }, { models }) {
@@ -49,6 +67,33 @@ module.exports = {
       }
       return models.Book.create({ ...input, user: user.id });
     },
+    requestBook(_, { input }, { models, user }) {
+      if (!user) {
+        return;
+      }
+      return models.Book.update({ id: input.id }, { requestedBy: user.id });
+    },
+    lendBook(_, { input }, { models, user }) {
+      if (!user) {
+        return;
+      }
+      return models.Book.update({
+        id: input.id,
+        user: user.id,
+      }, {
+        borrowedBy: input.requestedBy,
+        requestedBy: ''
+      });
+    },
+    returnBook(_, { input }, { models, user }) {
+      if (!user) {
+        return;
+      }
+      return models.Book.update({
+        id: input.id,
+        user: user.id,
+      }, { borrowedBy: '' });
+    },
   },
   Book: {
     owner(book, _, { models }) {
@@ -58,6 +103,12 @@ module.exports = {
   User: {
     books(user, _, { models }) {
       return models.Book.findMany({ user: user.id });
-    }
+    },
+    requested(user, _, { models }) {
+      return models.Book.findMany({ requestedBy: user.id });
+    },
+    borrowed(user, _, { models }) {
+      return models.Book.findMany({ borrowedBy: user.id });
+    },
   },
 };

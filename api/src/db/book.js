@@ -23,6 +23,17 @@ const createBookModel = db => ({
 
     return newBook;
   },
+
+  update(filter, update) {
+    db.get('book')
+      .find(filter)
+      .assign(update)
+      .write();
+
+    return db.get('book')
+      .find(filter)
+      .value();
+  },
 });
 
 module.exports = createBookModel;
