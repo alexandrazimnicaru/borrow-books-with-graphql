@@ -5,6 +5,8 @@ type User {
   id: ID!
   username: String!
   books: [Book]!
+  refreshToken: String!
+  token: String!
 }
 
 input NewUserInput {
@@ -30,12 +32,13 @@ input NewBookInput {
 }
 
 type Query {
-  user(id: ID!): User!
-  books(userId: ID): [Book]!
+  me: User!
+  books: [Book]!
   book(id: ID!): Book!
 }
 
 type Mutation {
+  login(input: NewUserInput!): User!
   addUser(input: NewUserInput!): User!
   addBook(input: NewBookInput!): Book!
 }

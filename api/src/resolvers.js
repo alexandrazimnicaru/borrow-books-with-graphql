@@ -1,20 +1,52 @@
+const bcrypt = require('bcrypt');
+const jsonwebtoken = require('jsonwebtoken');
+
+const getTokens = id => ({
+  refreshToken: jsonwebtoken.sign({ id }, 'mock-secret', { expiresIn: '7d'}),
+  token: jsonwebtoken.sign({ id }, 'mock-secret', { expiresIn: '2h'}),
+});
+
 module.exports = {
   Query: {
-    user(_, { id }, { models }) {
-      return models.User.findOne({id});
+    me(_, { id }, { models, user }) {
+      return user;
     },
-    books(_, { input }, { models }) {
-      return models.Book.findMany(input || {});
+    books(_, { input }, { models, user }) {
+      if (!user) {
+        return;
+      }
+      return models.Book.findMany({ user: user.id });
     },
-    book(_, { id }, { models }) {
+    book(_, { id }, { models, user }) {
+      if (!user) {
+        return;
+      }
       return models.Book.findOne({id});
     },
   },
   Mutation: {
+    login(_, { input }, { models }) {
+      const user = models.User.findOne({ username: input.username });
+      if (!user) {
+        return;
+      }
+
+      const valid = bcrypt.compareSync(input.password, user.password);
+      if (!valid) {
+        return;
+      }
+
+      return { ...user, ...getTokens(user.id) };
+    },
     addUser(_, { input }, { models }) {
-      return models.User.create({ ...input });
+      const hash = bcrypt.hashSync(input.password, 10);
+      const user = models.User.create({ username: input.username, password: hash });
+      return { ...user, ...getTokens(user.id) };
     },
     addBook(_, { input }, { models, user }) {
+      if (!user) {
+        return;
+      }
       return models.Book.create({ ...input, user: user.id });
     },
   },
