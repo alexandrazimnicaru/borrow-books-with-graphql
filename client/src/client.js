@@ -13,13 +13,26 @@ const delay = setContext(
     })
 );
 
-const cache = new InMemoryCache()
+const auth = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('access_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    }
+  }
+});
+
+const cache = new InMemoryCache();
 const http = new HttpLink({
   uri: 'http://localhost:4000/',
 });
 
 const link = ApolloLink.from([
   delay,
+  auth,
   http,
 ]);
 

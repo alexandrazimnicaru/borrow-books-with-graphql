@@ -7,10 +7,10 @@
       "password": "$2b$10$/KuUBt7ln15c6qS4GxYa..J1I38AmmEtuxEpytbeqkp1W5GjPs6FK"
     },
     {
-      "id": "TXZy2TY5KECxJDZ5b-Vmu",
-      "createdAt": 1581845481715,
+      "id": "5x8_R5Ojcwrr7_uZC32yG",
+      "createdAt": 1581851314845,
       "username": "dana",
-      "password": "$2b$10$D2Pcl3sad9p/wQmAepPvTO3pPlVDlGmMaAl8Vr/5VZ/vBN6XwOKXG"
+      "password": "$2b$10$N7dDg7njUa/RYPBDt51q1eYBBNxXPX9Zwe1ch3mSeZw1f6awOYWtK"
     }
   ],
   "book": [
@@ -40,6 +40,15 @@
       "genre": "Sci-Fi",
       "description": "Nineteen Eighty-Four: A Novel, often published as 1984, is a dystopian novel by English novelist George Orwell. It was published in June 1949 by Secker & Warburg as Orwell's ninth and final book completed in his lifetime.",
       "user": "77TGqhTaGWhX1JQ1sniP6"
+    },
+    {
+      "id": "J1H6ur_92-gzC4PjgOquE",
+      "createdAt": 1581853219005,
+      "title": "Wuthering Heights",
+      "author": "Emily Brontë",
+      "genre": "Fiction",
+      "description": "Wuthering Heights is a novel by Emily Brontë published in 1847 under her pseudonym \"Ellis Bell\". Brontë's only finished novel, it was written between October 1845 and June 1846.[1] Wuthering Heights and Anne Brontë's Agnes Grey were accepted by publisher Thomas Newby before the success of their sister Charlotte's novel Jane Eyre. After Emily's death, Charlotte edited the manuscript of Wuthering Heights and arranged for the edited version to be published as a posthumous second edition in 1850.",
+      "user": "5x8_R5Ojcwrr7_uZC32yG"
     }
   ]
 }

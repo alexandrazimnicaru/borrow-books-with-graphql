@@ -9,15 +9,20 @@ const server = new ApolloServer({
   resolvers,
   context({ req }) {
     const token = req.headers.authorization || '';
-
     if (!token) {
-      return { models, db };
+      return { models, db, user: null };
     }
 
-    const decoded = jsonwebtoken.verify(token, 'mock-secret');
+    // extract JWT without Bearer
+    const split = token.split(' ');
+    const jwt = split && split[1];
+    if (!jwt) {
+      return { models, db, user: null };
+    }
+
+    const decoded = jsonwebtoken.verify(jwt, 'mock-secret');
     const users = db.get('user').value();
     const currentUser = users.filter(user => user.id === decoded.id)[0];
-
     return { models, db, user: currentUser || null }
   }
 });

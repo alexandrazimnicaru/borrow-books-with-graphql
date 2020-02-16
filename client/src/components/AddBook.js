@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   field: {
-    width: '100%',
+    display: 'block',
     paddingBottom: '20px',
   },
   lastField: {
@@ -52,47 +52,43 @@ const AddBook = ({onSubmit, onCancel}) => {
         <Card>
           <CardContent>
             <form onSubmit={submit}>
-              <div>
-                <TextField
-                  className={classes.field}
-                  placeholder="Title"
-                  value={title}
-                  onChange={e => setTitle(e.target.value)}
-                  required
-                />
-              </div>
+              <TextField
+                className={classes.field}
+                placeholder="Title"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                fullWidth
+                required
+              />
 
-              <div>
-                <TextField
-                  className={classes.field}
-                  placeholder="Author"
-                  value={author}
-                  onChange={e => setAuthor(e.target.value)}
-                  required
-                />
-              </div>
+              <TextField
+                className={classes.field}
+                placeholder="Author"
+                value={author}
+                onChange={e => setAuthor(e.target.value)}
+                fullWidth
+                required
+              />
 
-              <div>
-                <TextField
-                  className={classes.field}
-                  placeholder="Genre"
-                  value={genre}
-                  onChange={e => setGenre(e.target.value)}
-                  required
-                />
-              </div>
+              <TextField
+                className={classes.field}
+                placeholder="Genre"
+                value={genre}
+                onChange={e => setGenre(e.target.value)}
+                fullWidth
+                required
+              />
 
-              <div>
-                <TextField
-                  className={classes.lastField}
-                  placeholder="Description"
-                  multiline
-                  rows="4"
-                  rowsMax="8"
-                  value={description}
-                  onChange={e => setDescription(e.target.value)}
-                />
-              </div>
+              <TextField
+                className={classes.lastField}
+                placeholder="Description"
+                multiline
+                rows="4"
+                rowsMax="8"
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                fullWidth
+              />
 
               <div>
                 <Button variant="contained" color="primary" type="submit" name="submit">

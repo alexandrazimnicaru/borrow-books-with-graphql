@@ -21,10 +21,8 @@ const BOOK_DETAILS = gql`
 `
 
 const GET_BOOKS = gql`
-  query books($input: ID) {
-    books(userId: $input) {
-      ...BookDetails
-    }
+  query books {
+    books { ...BookDetails }
   }
   ${BOOK_DETAILS}
 `
@@ -46,7 +44,9 @@ const useStyles = makeStyles(theme => ({
 
 const Books = () => {
   const [modal, setModal] = useState(false);
-  const books = useQuery(GET_BOOKS);
+  const books = useQuery(GET_BOOKS, {
+    fetchPolicy: 'cache-and-network',
+  });
   const classes = useStyles();
 
   const [createBook, newBook] = useMutation(CREATE_BOOK, {
@@ -82,11 +82,23 @@ const Books = () => {
     })
   }
 
-  const booksList = books.data.books.map(book => (
-    <Grid item xs={12} sm={6} md={4} lg={3} key={book.id}>
-      <Book {...book} />
-    </Grid>
-  ))
+  const getBooksList = (books) => {
+    if (!books.data.books.length) {
+      return (
+        <Grid item xs={12}>
+          <Typography variant="body2" component="p">
+            You haven't added any books yet. Click the button below to start!
+          </Typography>
+        </Grid>
+      );
+    }
+
+    return books.data.books.map(book => (
+      <Grid item xs={12} sm={6} md={4} lg={3} key={book.id}>
+        <Book {...book} />
+      </Grid>
+    ));
+  }; 
   
   if (modal) {
     return (
@@ -104,7 +116,7 @@ const Books = () => {
 
       <Grid item xs={12}>
         <Grid container spacing={3}>
-            {booksList}
+            { getBooksList(books) }
         </Grid>
       </Grid>
 
