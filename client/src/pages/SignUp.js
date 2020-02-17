@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 
 import { makeStyles } from '@material-ui/core/styles';
+import UserContext from '../contexts/UserContext';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -11,7 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import { HOME_URL } from '../constants';
+import { MY_BOOKS_URL } from '../constants';
 
 const CREATE_USER = gql`
   mutation CreateUser($input: NewUserInput!) {
@@ -39,6 +40,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignUp = () => {
+  const [user, setUser] = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
@@ -51,10 +53,10 @@ const SignUp = () => {
         return;
       }
 
-      // set username in global context
+      const [user, setUser] = useContext(UserContext);
       localStorage.setItem('access_token', addUserData.token);
       localStorage.setItem('refresh_token', addUserData.refreshToken);
-      history.push(HOME_URL);
+      history.push(MY_BOOKS_URL);
     }
   });
 

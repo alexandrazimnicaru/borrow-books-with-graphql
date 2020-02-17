@@ -21,7 +21,9 @@
       "author": "JRR Tokien",
       "genre": "Fantasy",
       "description": "The Lord of the Rings is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work.",
-      "user": "77TGqhTaGWhX1JQ1sniP6"
+      "user": "77TGqhTaGWhX1JQ1sniP6",
+      "requestedBy": "",
+      "borrowedBy": "5x8_R5Ojcwrr7_uZC32yG"
     },
     {
       "id": "Zoxh1l-90nGnBxvaLvMXO",
@@ -30,7 +32,8 @@
       "author": "William Golding",
       "genre": "Fiction",
       "description": "Lord of the Flies is a 1954 novel by Nobel Prize–winning British author William Golding. The book focuses on a group of British boys stranded on an uninhabited island and their disastrous attempt to govern themselves.",
-      "user": "77TGqhTaGWhX1JQ1sniP6"
+      "user": "77TGqhTaGWhX1JQ1sniP6",
+      "requestedBy": "5x8_R5Ojcwrr7_uZC32yG"
     },
     {
       "id": "dIyWhnvz4U8bO6aaYf0lu",
@@ -39,7 +42,9 @@
       "author": "George Orwell",
       "genre": "Sci-Fi",
       "description": "Nineteen Eighty-Four: A Novel, often published as 1984, is a dystopian novel by English novelist George Orwell. It was published in June 1949 by Secker & Warburg as Orwell's ninth and final book completed in his lifetime.",
-      "user": "77TGqhTaGWhX1JQ1sniP6"
+      "user": "77TGqhTaGWhX1JQ1sniP6",
+      "requestedBy": "",
+      "borrowedBy": ""
     },
     {
       "id": "J1H6ur_92-gzC4PjgOquE",
@@ -48,7 +53,49 @@
       "author": "Emily Brontë",
       "genre": "Fiction",
       "description": "Wuthering Heights is a novel by Emily Brontë published in 1847 under her pseudonym \"Ellis Bell\". Brontë's only finished novel, it was written between October 1845 and June 1846.[1] Wuthering Heights and Anne Brontë's Agnes Grey were accepted by publisher Thomas Newby before the success of their sister Charlotte's novel Jane Eyre. After Emily's death, Charlotte edited the manuscript of Wuthering Heights and arranged for the edited version to be published as a posthumous second edition in 1850.",
+      "user": "5x8_R5Ojcwrr7_uZC32yG",
+      "requestedBy": "77TGqhTaGWhX1JQ1sniP6",
+      "borrowedBy": ""
+    },
+    {
+      "id": "JtDdiJe5tsNo2cHXkHtyz",
+      "createdAt": 1581963783358,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Fiction",
+      "description": "It is a truth universally acknowledged that when most people think of Jane Austen they think of this charming and humorous story of love, difficult families and the tricky task of finding a handsome husband with a good fortune.",
+      "user": "5x8_R5Ojcwrr7_uZC32yG",
+      "requestedBy": "",
+      "borrowedBy": "77TGqhTaGWhX1JQ1sniP6"
+    },
+    {
+      "id": "gr_bwwLs2YzCX8tbdSuVy",
+      "createdAt": 1581963820451,
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Fiction",
+      "description": "A novel before its time, Harper Lee’s Pulitzer-prize winner addresses issues of race, inequality and segregation with both levity and compassion. Told through the eyes of loveable rogues Scout and Jem, it also created one of literature’s most beloved heroes – Atticus Finch, a man determined to right the racial wrongs of the Deep South.",
+      "user": "5x8_R5Ojcwrr7_uZC32yG",
+      "requestedBy": "",
+      "borrowedBy": "77TGqhTaGWhX1JQ1sniP6"
+    },
+    {
+      "id": "79EoR_WESGFwI-8QhL_8N",
+      "createdAt": 1581964631926,
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Fiction",
+      "description": "Jay Gatsby, the enigmatic millionaire who throws decadent parties but doesn’t attend them, is one of the great characters of American literature. This is Fitzgerald at his most sparkling and devastating.",
       "user": "5x8_R5Ojcwrr7_uZC32yG"
+    },
+    {
+      "id": "fm2YI_X0ypVr40quMkw56",
+      "createdAt": 1581964757852,
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "genre": "Sci-Fi",
+      "description": "Given the exponential growth of AI, Machine Learning & Robotics, Huxley's vision acts as a warning. Will we rise and challenge those who seek to shape our future or sleepwalk toward conditioning by technology?",
+      "user": "77TGqhTaGWhX1JQ1sniP6"
     }
   ]
 }

@@ -27,7 +27,9 @@ module.exports = {
       if (!user) {
         return;
       }
-      return models.Book.findMany(book => book.user !== user.id && !book.borrowedBy);
+      return models.Book.findMany(book => (
+        book.user !== user.id && !book.borrowedBy && !book.requestedBy
+      ));
     },
     requested(_, { input }, { models, user }) {
       if (!user) {

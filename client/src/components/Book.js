@@ -27,10 +27,10 @@ const useStyles = makeStyles(theme => ({
       height: '1.2em',
       background: 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%)',
     }
-  }
+  },
 }));
 
-const Book = ({ title, author, genre, description }) => {
+const Book = ({ book, renderActionArea }) => {
   const classes = useStyles();
 
   return (
@@ -38,26 +38,27 @@ const Book = ({ title, author, genre, description }) => {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {title}
+            {book.title}
           </Typography>
 
           <Typography gutterBottom variant="subtitle1" component="h3" color="textSecondary">
-            {author} | {genre}
+            {book.author} | {book.genre}
           </Typography>
   
           {
-            description && (
+            book.description && (
               <Typography
                 variant="body2"
                 color="textSecondary"
                 component="p"
                 className={classes.description}>
-                {description}
+                {book.description}
               </Typography>
             )
           }
         </CardContent>
       </CardActionArea>
+      { renderActionArea && renderActionArea(book) }
     </Card>
   )
 };

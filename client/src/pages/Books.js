@@ -6,6 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
+import Chip from '@material-ui/core/Chip';
+import CheckIcon from '@material-ui/icons/Check';
 import Book from '../components/Book';
 import AddBook from '../components/AddBook';
 import Loader from '../components/Loader';
@@ -17,6 +20,11 @@ const BOOK_DETAILS = gql`
     author
     genre
     description
+    owner {
+      id
+    }
+    requestedBy
+    borrowedBy
   }
 `
 
@@ -36,9 +44,39 @@ const CREATE_BOOK = gql`
   ${BOOK_DETAILS}
 `;
 
+const LEND_BOOK = gql`
+  mutation LendBook($input: NewLendBookInput!) {
+    lendBook(input: $input) {
+      ...BookDetails
+    }
+  }
+  ${BOOK_DETAILS}
+`;
+
+const RETURN_BOOK = gql`
+  mutation ReturnBook($input: NewRequestBookInput!) {
+    returnBook(input: $input) {
+      ...BookDetails
+    }
+  }
+  ${BOOK_DETAILS}
+`;
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+  },
+  action: {
+    background: 'white',
+    position: 'relative',
+  },
+  actionChip: {
+    marginLeft: 'auto !important',
+  },
+  defaultAction: {
+    position: 'relative',
+    background: 'white',
+    height: '52px',
   },
 }));
 
@@ -51,7 +89,7 @@ const Books = () => {
 
   const [createBook, newBook] = useMutation(CREATE_BOOK, {
     update(cache, { data: { addBook } }) {
-      const { books } = cache.readQuery({ query: GET_BOOKS })
+      const { books } = cache.readQuery({ query: GET_BOOKS });
 
       cache.writeQuery({
         query: GET_BOOKS,
@@ -60,8 +98,13 @@ const Books = () => {
     }
   });
 
+  const [acceptRequest, lendRequest] = useMutation(LEND_BOOK);
+  const [returnBook, returnRequest] = useMutation(RETURN_BOOK);
+
   if (books.loading) return <Loader />
-  if (books.error || newBook.error) return <p>ERROR</p>
+  if (books.error || newBook.error || lendRequest.error || returnRequest.error) {
+    return <p>ERROR</p>;
+  }
 
   const onSubmit = input => {
     setModal(false)
@@ -80,7 +123,78 @@ const Books = () => {
         }
       }
     })
-  }
+  };
+
+  const onLend = input => {
+    acceptRequest({
+      variables: {
+        input: { id: input.id, requestedBy: input.requestedBy }
+      },
+    
+      optimisticResponse: {
+        __typename: 'Mutation',
+        lendBook: {
+          __typename: 'Book',
+          id: input.id,
+          requestedBy: input.requestedBy
+        }
+      }
+    })
+  };
+
+  const onReturn = input => {
+    returnBook({
+      variables: {
+        input: { id: input.id }
+      },
+    
+      optimisticResponse: {
+        __typename: 'Mutation',
+        returnBook: {
+          __typename: 'Book',
+          id: input.id
+        }
+      }
+    })
+  };
+
+  const renderActionArea = (book) => {
+    if (book.requestedBy) {
+      return (
+        <CardActions className={classes.action}>
+          <Button variant="contained" onClick={() => onLend(book)}>
+            Lend book
+          </Button>
+
+          <Chip
+            className={classes.actionChip}
+            icon={<CheckIcon />}
+            label="Requested"
+            color="secondary"
+          />
+        </CardActions>
+      );
+    }
+
+    if (book.borrowedBy) {
+      return (
+        <CardActions className={classes.action}>
+          <Button variant="contained" onClick={() => onReturn(book)}>
+            Returned
+          </Button>
+
+          <Chip
+            className={classes.actionChip}
+            icon={<CheckIcon />}
+            label="Borrowed"
+            color="secondary"
+          />
+        </CardActions>
+      );
+    }
+
+    return <CardActions className={classes.defaultAction}></CardActions>;
+  };
 
   const getBooksList = (books) => {
     if (!books.data.books.length) {
@@ -91,11 +205,11 @@ const Books = () => {
           </Typography>
         </Grid>
       );
-    }
+    };
 
     return books.data.books.map(book => (
       <Grid item xs={12} sm={6} md={4} lg={3} key={book.id}>
-        <Book {...book} />
+        <Book book={book} renderActionArea={renderActionArea} />
       </Grid>
     ));
   }; 
@@ -115,15 +229,15 @@ const Books = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <Grid container spacing={3}>
-            { getBooksList(books) }
-        </Grid>
-      </Grid>
-
-      <Grid item xs={12}>
         <Button variant="contained" color="primary" onClick={() => setModal(true)}>
           Add book
         </Button>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Grid container spacing={3}>
+            { getBooksList(books) }
+        </Grid>
       </Grid>
     </Grid>
   )
